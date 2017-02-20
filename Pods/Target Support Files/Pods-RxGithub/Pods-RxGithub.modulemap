@@ -1,0 +1,6 @@
+framework module Pods_RxGithub {
+  umbrella header "Pods-RxGithub-umbrella.h"
+
+  export *
+  module * { export * }
+}
