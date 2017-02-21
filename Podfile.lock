@@ -26,6 +26,8 @@ PODS:
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
   - Himotoki (3.0.0)
+  - Nimble (6.0.1)
+  - Quick (1.1.0)
   - RxCocoa (3.2.0):
     - RxSwift (~> 3.1)
   - RxOptional (3.1.3):
@@ -42,6 +44,8 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Himotoki (~> 3.0)
+  - Nimble
+  - Quick
   - RxCocoa (~> 3.0)
   - RxOptional (~> 3.1)
   - RxSwift (~> 3.0)
@@ -70,6 +74,8 @@ SPEC CHECKSUMS:
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   Himotoki: df74b01035e86e021b7b04a15b033a7fd189b84f
+  Nimble: 1527fd1bd2b4cf0636251a36bc8ab37e81da8347
+  Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
   RxCocoa: ccdf43101a70407097a29082f648ba1676075b30
   RxOptional: b97b59183af80d1e729ac9e51d09a10be668d6a8
   RxSwift: 46574f70d416b7923c237195939cc488a7fbf3a0
@@ -77,6 +83,6 @@ SPEC CHECKSUMS:
   Swinject: 2e964a80d70ab09b3949c99032711f89147bfd60
   SwinjectStoryboard: 8e0d3c0202b64172bdf915d55e8dc83d9c4e7863
 
-PODFILE CHECKSUM: 934b7edfdf8dfcbcf8adfabd1b5c3683f44e8042
+PODFILE CHECKSUM: 302335d03af393d54558d8461a243efef47b9f10
 
 COCOAPODS: 1.1.1

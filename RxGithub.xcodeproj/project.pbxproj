@@ -16,6 +16,9 @@
 		923DE47D1E5B450D001969F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 923DE47B1E5B450D001969F0 /* LaunchScreen.storyboard */; };
 		923DE4881E5B450E001969F0 /* RxGithubTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923DE4871E5B450E001969F0 /* RxGithubTests.swift */; };
 		92B0192A1E5B470A00BB4B25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92B019291E5B470A00BB4B25 /* GoogleService-Info.plist */; };
+		92CC164A1E5C5951005007BB /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CC16491E5C5951005007BB /* NetworkError.swift */; };
+		92CC164D1E5C59A3005007BB /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CC164C1E5C59A3005007BB /* Network.swift */; };
+		92CC16511E5C5A5C005007BB /* NetworkSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CC16501E5C5A5C005007BB /* NetworkSpec.swift */; };
 		92F9183F1E5B9A65004199F0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F9183E1E5B9A65004199F0 /* ProfileViewController.swift */; };
 		92F918411E5B9AD5004199F0 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F918401E5B9AD5004199F0 /* CommentsViewController.swift */; };
 /* End PBXBuildFile section */
@@ -47,6 +50,9 @@
 		923DE4871E5B450E001969F0 /* RxGithubTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxGithubTests.swift; sourceTree = "<group>"; };
 		923DE4891E5B450E001969F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92B019291E5B470A00BB4B25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		92CC16491E5C5951005007BB /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		92CC164C1E5C59A3005007BB /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		92CC16501E5C5A5C005007BB /* NetworkSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkSpec.swift; sourceTree = "<group>"; };
 		92F9183E1E5B9A65004199F0 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		92F918401E5B9AD5004199F0 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		F472D77CB1259AAEEE9959AD /* Pods-RxGithub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxGithub.release.xcconfig"; path = "Pods/Target Support Files/Pods-RxGithub/Pods-RxGithub.release.xcconfig"; sourceTree = "<group>"; };
@@ -106,7 +112,9 @@
 		923DE4711E5B450D001969F0 /* RxGithub */ = {
 			isa = PBXGroup;
 			children = (
+				92CC16471E5C5910005007BB /* Model */,
 				92B0192B1E5B59FD00BB4B25 /* View */,
+				92CC16481E5C5917005007BB /* ViewModel */,
 				923DE4721E5B450D001969F0 /* AppDelegate.swift */,
 				923DE4761E5B450D001969F0 /* Main.storyboard */,
 				923DE4791E5B450D001969F0 /* Assets.xcassets */,
@@ -120,6 +128,7 @@
 		923DE4861E5B450E001969F0 /* RxGithubTests */ = {
 			isa = PBXGroup;
 			children = (
+				92CC164E1E5C5A4B005007BB /* Model */,
 				923DE4871E5B450E001969F0 /* RxGithubTests.swift */,
 				923DE4891E5B450E001969F0 /* Info.plist */,
 			);
@@ -132,6 +141,46 @@
 				92F9183D1E5B9A31004199F0 /* Controllers */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		92CC16471E5C5910005007BB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				92CC164B1E5C5961005007BB /* Network */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		92CC16481E5C5917005007BB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		92CC164B1E5C5961005007BB /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				92CC16491E5C5951005007BB /* NetworkError.swift */,
+				92CC164C1E5C59A3005007BB /* Network.swift */,
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
+		92CC164E1E5C5A4B005007BB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				92CC164F1E5C5A51005007BB /* Network */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		92CC164F1E5C5A51005007BB /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				92CC16501E5C5A5C005007BB /* NetworkSpec.swift */,
+			);
+			name = Network;
 			sourceTree = "<group>";
 		};
 		92F9183D1E5B9A31004199F0 /* Controllers */ = {
@@ -358,7 +407,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92CC164A1E5C5951005007BB /* NetworkError.swift in Sources */,
 				92F9183F1E5B9A65004199F0 /* ProfileViewController.swift in Sources */,
+				92CC164D1E5C59A3005007BB /* Network.swift in Sources */,
 				92F918411E5B9AD5004199F0 /* CommentsViewController.swift in Sources */,
 				923DE4751E5B450D001969F0 /* SearchViewController.swift in Sources */,
 				923DE4731E5B450D001969F0 /* AppDelegate.swift in Sources */,
@@ -370,6 +421,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				923DE4881E5B450E001969F0 /* RxGithubTests.swift in Sources */,
+				92CC16511E5C5A5C005007BB /* NetworkSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,6 +581,20 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = WZ8GG366SX;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/Pods",
+					"$(inherited)",
+					"${PODS_ROOT}/Firebase/Core/Sources",
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalytics\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCore\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseDatabase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleInterchangeUtilities\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleSymbolUtilities\"",
+				);
 				INFOPLIST_FILE = RxGithubTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = bz.oron.RxGithubTests;
@@ -545,6 +611,20 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = WZ8GG366SX;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/Pods",
+					"$(inherited)",
+					"${PODS_ROOT}/Firebase/Core/Sources",
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalytics\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCore\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseDatabase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleInterchangeUtilities\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleSymbolUtilities\"",
+				);
 				INFOPLIST_FILE = RxGithubTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = bz.oron.RxGithubTests;
