@@ -166,6 +166,10 @@
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user2" translatesAutoresizingMaskIntoConstraints="NO" id="Vfw-4O-WJT" customClass="DesignableImageView" customModule="Spring">
                                 <rect key="frame" x="75" y="128" width="225" height="225"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="225" id="Oqw-Vl-9df"/>
+                                    <constraint firstAttribute="height" constant="225" id="afv-cp-IWO"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="110"/>
@@ -208,6 +212,11 @@
                             <constraint firstItem="WBg-LR-9sg" firstAttribute="top" secondItem="Fom-Mb-sxH" secondAttribute="bottom" constant="174" id="xHf-WK-cKy"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="showCommentsButton" destination="ZCX-fd-SVT" id="S0L-T7-Qyn"/>
+                        <outlet property="userImage" destination="Vfw-4O-WJT" id="yle-gP-pQc"/>
+                        <outlet property="userLabel" destination="Llw-WL-x3V" id="pyC-Jq-d22"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ByR-kN-dZs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
