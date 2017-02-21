@@ -36,7 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             container.register(SearchViewModeling.self) { r in
                 SearchViewModel(
                     network: r.resolve(Networking.self)!,
-                    gitHubService: r.resolve(GitHubServicing.self)!)
+                    gitHubService: r.resolve(GitHubServicing.self)!,
+                    commentService: r.resolve(CommentServicing.self)!)
             }
             
             // Views

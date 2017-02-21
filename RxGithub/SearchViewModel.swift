@@ -32,7 +32,9 @@ class SearchViewModel: SearchViewModeling {
     let resultCountLabel: Observable<String>
     let presentProfile: Observable<ProfileViewModeling>
     
-    init(network: Networking, gitHubService: GitHubServicing) {
+    init(network: Networking,
+         gitHubService: GitHubServicing,
+         commentService: CommentServicing) {
         
         let searchResults = searchText
             .throttle(0.3, scheduler: MainScheduler.instance)
@@ -55,7 +57,7 @@ class SearchViewModel: SearchViewModeling {
             .withLatestFrom(searchResults) { cell, results in
                 (cell, results)
             }.map { cell, results in
-                ProfileViewModel(network: network, user: results.users[cell])
+                ProfileViewModel(network: network, user: results.users[cell], commentService: commentService)
             }
     }
     

@@ -20,6 +20,8 @@ class ProfileViewController: UIViewController {
     var viewModel: ProfileViewModeling!
     
     private var disposeBag = DisposeBag()
+    
+    private var commentsViewModel: CommentsViewModeling!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +41,19 @@ class ProfileViewController: UIViewController {
             .bindTo(userImage.rx.image)
             .disposed(by: disposeBag)
         
+        viewModel.showComments
+            .subscribe(onNext: { [unowned self] in
+                self.commentsViewModel = $0
+                self.performSegue(withIdentifier: "Comments", sender: self)
+            }).disposed(by: disposeBag)
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "Comments") {
+            let controller = segue.destination as! CommentsViewController
+            controller.viewModel = commentsViewModel
+        }
     }
 
 }

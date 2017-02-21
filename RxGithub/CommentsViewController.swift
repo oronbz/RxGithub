@@ -14,6 +14,8 @@ class CommentsViewController: UIViewController {
     @IBOutlet weak var inserCommentField: DesignableTextField!
     @IBOutlet weak var insertCommentView: UIView!
     
+    var viewModel: CommentsViewModeling!
+    
     override var canBecomeFirstResponder: Bool {
         return true
     }

@@ -16,6 +16,7 @@ protocol ProfileViewModeling {
     // MARK: - Output
     var image: Observable<UIImage> { get }
     var username: String { get }
+    var showComments: Observable<CommentsViewModeling> { get }
 }
 
 class ProfileViewModel: ProfileViewModeling {
@@ -26,8 +27,9 @@ class ProfileViewModel: ProfileViewModeling {
     // MARK: - Output
     let image: Observable<UIImage>
     let username: String
+    let showComments: Observable<CommentsViewModeling>
     
-    init(network: Networking, user: GitHubUser) {
+    init(network: Networking, user: GitHubUser, commentService: CommentServicing) {
         let placeholder = #imageLiteral(resourceName: "user2")
         image = Observable.just(placeholder)
                 .concat(network.image(url: user.avatarUrl))
@@ -35,6 +37,11 @@ class ProfileViewModel: ProfileViewModeling {
                 .catchErrorJustReturn(placeholder)
         
         username = user.username
+        
+        showComments = showCommentsDidTap
+            .map { CommentsViewModel(
+                commentsService: commentService,
+                username: user.username) }
     }
     
 }
