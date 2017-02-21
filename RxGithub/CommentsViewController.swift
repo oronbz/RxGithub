@@ -8,13 +8,19 @@
 
 import UIKit
 import Spring
+import RxSwift
+import RxCocoa
 
 class CommentsViewController: UIViewController {
 
     @IBOutlet weak var inserCommentField: DesignableTextField!
     @IBOutlet weak var insertCommentView: UIView!
+    @IBOutlet weak var submitButton: DesignableButton!
+    @IBOutlet weak var tableView: UITableView!
     
     var viewModel: CommentsViewModeling!
+    
+    private let disposeBag = DisposeBag()
     
     override var canBecomeFirstResponder: Bool {
         return true
@@ -27,7 +33,32 @@ class CommentsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         insertCommentView.removeFromSuperview()
-        // Do any additional setup after loading the view.
+        
+        setupBindings()
+    }
+    
+    private func setupBindings() {
+        
+        inserCommentField.rx.text.orEmpty
+            .bindTo(viewModel.commentText)
+            .disposed(by: disposeBag)
+        
+        submitButton.rx.tap
+            .do(onNext: { [unowned self] in
+                self.inserCommentField.text = ""
+            })
+            .bindTo(viewModel.submitDidTap)
+            .disposed(by: disposeBag)
+        
+        viewModel.submitEnabled
+            .bindTo(submitButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        viewModel.comments
+            .bindTo(tableView.rx.items(cellIdentifier: "CommentCell", cellType: CommentCell.self)) { index, comment, cell in
+                cell.comment = comment
+            }.disposed(by: disposeBag)
+        
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -47,15 +78,4 @@ class CommentsViewController: UIViewController {
 // MARK: - UITableViewDelegate
 extension CommentsViewController: UITableViewDelegate {
     
-}
-
-// MARK: - UITableViewDatasource
-extension CommentsViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCell(withIdentifier: "CommentCell") ?? UITableViewCell()
-    }
 }

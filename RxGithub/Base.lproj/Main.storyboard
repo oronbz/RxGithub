@@ -236,7 +236,7 @@
                                 <rect key="frame" x="0.0" y="4" width="375" height="663"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CommentCell" rowHeight="67" id="TEt-Je-TxW">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CommentCell" rowHeight="67" id="TEt-Je-TxW" customClass="CommentCell" customModule="RxGithub" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="67"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TEt-Je-TxW" id="YaN-Wn-Vao">
@@ -256,10 +256,12 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="commentLabel" destination="O3I-DM-bFo" id="InC-ai-BMr"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="YGA-I5-F0V" id="mTB-ag-gfZ"/>
                                     <outlet property="delegate" destination="YGA-I5-F0V" id="eZY-j8-gMr"/>
                                 </connections>
                             </tableView>
@@ -334,6 +336,8 @@
                     <connections>
                         <outlet property="inserCommentField" destination="e7a-xO-a4c" id="GiW-jU-xHM"/>
                         <outlet property="insertCommentView" destination="R5r-G1-WED" id="C4a-3z-QTe"/>
+                        <outlet property="submitButton" destination="hPz-e7-dfc" id="Tvi-u1-iXs"/>
+                        <outlet property="tableView" destination="bf4-bR-MXi" id="SVR-s2-Cub"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jsx-dA-22P" userLabel="First Responder" sceneMemberID="firstResponder"/>

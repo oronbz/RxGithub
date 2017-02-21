@@ -31,6 +31,7 @@
 		92CC16691E5CA916005007BB /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CC16681E5CA916005007BB /* Keys.swift */; };
 		92CC166B1E5CB95B005007BB /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CC166A1E5CB95B005007BB /* ProfileViewModel.swift */; };
 		92CC166E1E5CD3FB005007BB /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CC166D1E5CD3FB005007BB /* CommentsViewModel.swift */; };
+		92CC16721E5CDA0B005007BB /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CC16711E5CDA0B005007BB /* CommentCell.swift */; };
 		92F9183F1E5B9A65004199F0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F9183E1E5B9A65004199F0 /* ProfileViewController.swift */; };
 		92F918411E5B9AD5004199F0 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F918401E5B9AD5004199F0 /* CommentsViewController.swift */; };
 /* End PBXBuildFile section */
@@ -77,6 +78,7 @@
 		92CC16681E5CA916005007BB /* Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		92CC166A1E5CB95B005007BB /* ProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		92CC166D1E5CD3FB005007BB /* CommentsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewModel.swift; sourceTree = "<group>"; };
+		92CC16711E5CDA0B005007BB /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		92F9183E1E5B9A65004199F0 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		92F918401E5B9AD5004199F0 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		F472D77CB1259AAEEE9959AD /* Pods-RxGithub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxGithub.release.xcconfig"; path = "Pods/Target Support Files/Pods-RxGithub/Pods-RxGithub.release.xcconfig"; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				92CC16661E5C99C3005007BB /* UserCell.swift */,
+				92CC16711E5CDA0B005007BB /* CommentCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -484,6 +487,7 @@
 				92CC165E1E5C7953005007BB /* CommentService.swift in Sources */,
 				92CC16641E5C8A9D005007BB /* UserCellModel.swift in Sources */,
 				92F918411E5B9AD5004199F0 /* CommentsViewController.swift in Sources */,
+				92CC16721E5CDA0B005007BB /* CommentCell.swift in Sources */,
 				923DE4751E5B450D001969F0 /* SearchViewController.swift in Sources */,
 				92CC166B1E5CB95B005007BB /* ProfileViewModel.swift in Sources */,
 				92CC16591E5C71AA005007BB /* GitHubUser.swift in Sources */,

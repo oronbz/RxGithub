@@ -33,6 +33,7 @@ class CommentsViewModel: CommentsViewModeling {
     
     init(commentsService: CommentServicing, username: String) {
         submitEnabled = commentText.map { text in text.characters.count > 0 }
+            .startWith(false)
         
         comments = commentsService.comments(for: username)
             .observeOn(MainScheduler.instance)
