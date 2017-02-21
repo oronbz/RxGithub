@@ -29,7 +29,7 @@
                                 <rect key="frame" x="0.0" y="108" width="375" height="499"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" rowHeight="67" id="Ku1-ND-tYE">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" rowHeight="67" id="Ku1-ND-tYE" customClass="UserCell" customModule="RxGithub" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="67"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ku1-ND-tYE" id="Fkl-AM-ciJ">
@@ -64,13 +64,14 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
+                                            <outlet property="userImage" destination="Mha-2C-naJ" id="Y06-N7-v85"/>
+                                            <outlet property="userLabel" destination="7SR-We-l0t" id="oHQ-ej-Yzy"/>
                                             <segue destination="QP0-Re-DFQ" kind="show" id="AAa-kM-8cQ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <sections/>
                                 <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="cro-D7-IOo"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="VKH-Ok-ztJ"/>
                                 </connections>
                             </tableView>
@@ -119,6 +120,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Search" id="htv-aN-VTw"/>
                     <connections>
+                        <outlet property="resultsLabel" destination="wUK-eN-5ar" id="L0n-TX-fyh"/>
+                        <outlet property="searchBar" destination="s6U-kG-REN" id="ivH-7P-mt0"/>
                         <outlet property="tableView" destination="cKI-6S-jVF" id="kQW-30-49u"/>
                     </connections>
                 </viewController>

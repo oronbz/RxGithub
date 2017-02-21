@@ -21,9 +21,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // DI
         container = Container() { container in
+            // Model
+            container.register(Networking.self) { _ in
+                Network()
+            }
+            container.register(GitHubServicing.self) { r in
+                GitHubService(network: r.resolve(Networking.self)!)
+            }
+            container.register(CommentServicing.self) { _ in
+                CommentService()
+            }
+            
+            // ViewModel
+            container.register(SearchViewModeling.self) { r in
+                SearchViewModel(
+                    network: r.resolve(Networking.self)!,
+                    gitHubService: r.resolve(GitHubServicing.self)!)
+            }
+            
             // Views
             container.storyboardInitCompleted(UINavigationController.self) { _,_ in }
-            container.storyboardInitCompleted(SearchViewController.self) { _,_ in }
+            container.storyboardInitCompleted(SearchViewController.self) { r,c in
+                c.viewModel = r.resolve(SearchViewModeling.self)!
+            }
             container.storyboardInitCompleted(ProfileViewController.self) { _,_ in }
             container.storyboardInitCompleted(CommentsViewController.self) { _,_ in }
         }

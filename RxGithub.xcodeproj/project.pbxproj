@@ -25,6 +25,10 @@
 		92CC165C1E5C7440005007BB /* GitHubServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CC165B1E5C7440005007BB /* GitHubServiceSpec.swift */; };
 		92CC165E1E5C7953005007BB /* CommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CC165D1E5C7953005007BB /* CommentService.swift */; };
 		92CC16601E5C8352005007BB /* CommentServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CC165F1E5C8352005007BB /* CommentServiceSpec.swift */; };
+		92CC16621E5C8753005007BB /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CC16611E5C8753005007BB /* SearchViewModel.swift */; };
+		92CC16641E5C8A9D005007BB /* UserCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CC16631E5C8A9D005007BB /* UserCellModel.swift */; };
+		92CC16671E5C99C3005007BB /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CC16661E5C99C3005007BB /* UserCell.swift */; };
+		92CC16691E5CA916005007BB /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CC16681E5CA916005007BB /* Keys.swift */; };
 		92F9183F1E5B9A65004199F0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F9183E1E5B9A65004199F0 /* ProfileViewController.swift */; };
 		92F918411E5B9AD5004199F0 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F918401E5B9AD5004199F0 /* CommentsViewController.swift */; };
 /* End PBXBuildFile section */
@@ -65,6 +69,10 @@
 		92CC165B1E5C7440005007BB /* GitHubServiceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubServiceSpec.swift; sourceTree = "<group>"; };
 		92CC165D1E5C7953005007BB /* CommentService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentService.swift; sourceTree = "<group>"; };
 		92CC165F1E5C8352005007BB /* CommentServiceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentServiceSpec.swift; sourceTree = "<group>"; };
+		92CC16611E5C8753005007BB /* SearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		92CC16631E5C8A9D005007BB /* UserCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCellModel.swift; sourceTree = "<group>"; };
+		92CC16661E5C99C3005007BB /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		92CC16681E5CA916005007BB /* Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		92F9183E1E5B9A65004199F0 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		92F918401E5B9AD5004199F0 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		F472D77CB1259AAEEE9959AD /* Pods-RxGithub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxGithub.release.xcconfig"; path = "Pods/Target Support Files/Pods-RxGithub/Pods-RxGithub.release.xcconfig"; sourceTree = "<group>"; };
@@ -150,6 +158,7 @@
 		92B0192B1E5B59FD00BB4B25 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				92CC16651E5C99AF005007BB /* Cells */,
 				92F9183D1E5B9A31004199F0 /* Controllers */,
 			);
 			name = View;
@@ -161,6 +170,7 @@
 				92CC16551E5C70F5005007BB /* Entities */,
 				92CC16521E5C70AD005007BB /* Services */,
 				92CC164B1E5C5961005007BB /* Network */,
+				92CC16681E5CA916005007BB /* Keys.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -168,6 +178,8 @@
 		92CC16481E5C5917005007BB /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				92CC16611E5C8753005007BB /* SearchViewModel.swift */,
+				92CC16631E5C8A9D005007BB /* UserCellModel.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -223,6 +235,14 @@
 				92CC165F1E5C8352005007BB /* CommentServiceSpec.swift */,
 			);
 			name = Services;
+			sourceTree = "<group>";
+		};
+		92CC16651E5C99AF005007BB /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				92CC16661E5C99C3005007BB /* UserCell.swift */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		92F9183D1E5B9A31004199F0 /* Controllers */ = {
@@ -449,14 +469,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92CC16621E5C8753005007BB /* SearchViewModel.swift in Sources */,
+				92CC16671E5C99C3005007BB /* UserCell.swift in Sources */,
 				92CC164A1E5C5951005007BB /* NetworkError.swift in Sources */,
 				92F9183F1E5B9A65004199F0 /* ProfileViewController.swift in Sources */,
 				92CC164D1E5C59A3005007BB /* Network.swift in Sources */,
 				92CC165E1E5C7953005007BB /* CommentService.swift in Sources */,
+				92CC16641E5C8A9D005007BB /* UserCellModel.swift in Sources */,
 				92F918411E5B9AD5004199F0 /* CommentsViewController.swift in Sources */,
 				923DE4751E5B450D001969F0 /* SearchViewController.swift in Sources */,
 				92CC16591E5C71AA005007BB /* GitHubUser.swift in Sources */,
 				92CC16571E5C7176005007BB /* GitHubUserSearch.swift in Sources */,
+				92CC16691E5CA916005007BB /* Keys.swift in Sources */,
 				923DE4731E5B450D001969F0 /* AppDelegate.swift in Sources */,
 				92CC16541E5C70DD005007BB /* GitHubService.swift in Sources */,
 			);

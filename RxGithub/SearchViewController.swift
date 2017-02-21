@@ -7,19 +7,42 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class SearchViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    @IBOutlet weak var resultsLabel: UILabel!
+    
+    var viewModel: SearchViewModeling!
+    
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        setupBindings()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    private func setupBindings() {
+        searchBar.rx.text.orEmpty
+            .bindTo(viewModel.searchText)
+            .disposed(by: disposeBag)
+        
+        viewModel.cellModels
+            .bindTo(tableView.rx.items(cellIdentifier: "UserCell", cellType: UserCell.self)) {
+                i, cellModel, cell in
+                cell.viewModel = cellModel
+            }.disposed(by: disposeBag)
+        
+        viewModel.resultCountLabel
+            .bindTo(resultsLabel.rx.text)
+            .disposed(by: disposeBag)
+ 
     }
 
 }
@@ -32,15 +55,3 @@ extension SearchViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
-
-// MARK: - UITableViewDatasource
-extension SearchViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCell(withIdentifier: "UserCell") ?? UITableViewCell()
-    }
-}
-
