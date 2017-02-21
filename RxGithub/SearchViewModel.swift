@@ -16,8 +16,9 @@ protocol SearchViewModeling {
     var cellDidSelect: PublishSubject<Int> { get }
     
     // MARK: - Output
-    var cellModels: Observable<[UserCellModel]> { get }
+    var cellModels: Observable<[UserCellModeling]> { get }
     var resultCountLabel: Observable<String> { get }
+    var presentProfile: Observable<ProfileViewModeling> { get }
 }
 
 class SearchViewModel: SearchViewModeling {
@@ -27,8 +28,9 @@ class SearchViewModel: SearchViewModeling {
     let cellDidSelect: PublishSubject<Int> = PublishSubject<Int>()
     
     // MARK: - Output
-    let cellModels: Observable<[UserCellModel]>
+    let cellModels: Observable<[UserCellModeling]>
     let resultCountLabel: Observable<String>
+    let presentProfile: Observable<ProfileViewModeling>
     
     init(network: Networking, gitHubService: GitHubServicing) {
         
@@ -48,6 +50,13 @@ class SearchViewModel: SearchViewModeling {
             }
         
         resultCountLabel = searchResults.map { "\($0.users.count) result(s)" }
+        
+        presentProfile = cellDidSelect
+            .withLatestFrom(searchResults) { cell, results in
+                (cell, results)
+            }.map { cell, results in
+                ProfileViewModel(network: network, user: results.users[cell])
+            }
     }
     
 }

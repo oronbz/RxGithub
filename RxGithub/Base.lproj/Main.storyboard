@@ -66,7 +66,6 @@
                                         <connections>
                                             <outlet property="userImage" destination="Mha-2C-naJ" id="Y06-N7-v85"/>
                                             <outlet property="userLabel" destination="7SR-We-l0t" id="oHQ-ej-Yzy"/>
-                                            <segue destination="QP0-Re-DFQ" kind="show" id="AAa-kM-8cQ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -123,6 +122,7 @@
                         <outlet property="resultsLabel" destination="wUK-eN-5ar" id="L0n-TX-fyh"/>
                         <outlet property="searchBar" destination="s6U-kG-REN" id="ivH-7P-mt0"/>
                         <outlet property="tableView" destination="cKI-6S-jVF" id="kQW-30-49u"/>
+                        <segue destination="QP0-Re-DFQ" kind="show" identifier="Profile" id="riu-m9-Fxt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

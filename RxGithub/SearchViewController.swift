@@ -20,6 +20,8 @@ class SearchViewController: UIViewController {
     
     var viewModel: SearchViewModeling!
     
+    private var profileViewModel: ProfileViewModeling!
+    
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -33,6 +35,11 @@ class SearchViewController: UIViewController {
             .bindTo(viewModel.searchText)
             .disposed(by: disposeBag)
         
+        tableView.rx.itemSelected
+            .map { $0.row }
+            .bindTo(viewModel.cellDidSelect)
+            .disposed(by: disposeBag)
+        
         viewModel.cellModels
             .bindTo(tableView.rx.items(cellIdentifier: "UserCell", cellType: UserCell.self)) {
                 i, cellModel, cell in
@@ -42,7 +49,21 @@ class SearchViewController: UIViewController {
         viewModel.resultCountLabel
             .bindTo(resultsLabel.rx.text)
             .disposed(by: disposeBag)
+        
+        // REMEMBER TO CREATE NEW SEGUE INSTEAD OF OLD ONE
+        viewModel.presentProfile
+            .subscribe(onNext: { [unowned self] viewModel in
+                self.profileViewModel = viewModel
+                self.performSegue(withIdentifier: "Profile", sender: self)
+            }).disposed(by: disposeBag)
  
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Profile" {
+            let controller = segue.destination as! ProfileViewController
+            controller.viewModel = profileViewModel
+        }
     }
 
 }
