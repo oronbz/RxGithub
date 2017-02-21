@@ -17,16 +17,29 @@ class UserCell: UITableViewCell {
     @IBOutlet weak var userImage: DesignableImageView!
     @IBOutlet weak var userLabel: UILabel!
     
-    private var disposeBag = DisposeBag()
+    private var disposeBag: DisposeBag? = DisposeBag()
     
-    var viewModel: UserCellModeling! {
+    var viewModel: UserCellModeling? {
         didSet {
+            let disposeBag = DisposeBag()
+            
+            guard let viewModel = viewModel else { return }
+            
             viewModel.image
                 .bindTo(userImage.rx.image)
                 .disposed(by: disposeBag)
             
             userLabel.text = viewModel.username
+            
+            self.disposeBag = disposeBag
         }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        viewModel = nil
+        disposeBag = nil
     }
 
     override func awakeFromNib() {
