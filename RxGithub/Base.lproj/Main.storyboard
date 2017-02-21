@@ -129,7 +129,7 @@
         <!--Profile-->
         <scene sceneID="E2g-XI-xpt">
             <objects>
-                <viewController title="Profile" id="QP0-Re-DFQ" sceneMemberID="viewController">
+                <viewController title="Profile" id="QP0-Re-DFQ" customClass="ProfileViewController" customModule="RxGithub" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Fom-Mb-sxH"/>
                         <viewControllerLayoutGuide type="bottom" id="Tyy-kf-SfM"/>

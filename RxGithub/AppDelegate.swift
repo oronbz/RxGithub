@@ -8,17 +8,38 @@
 
 import UIKit
 import Firebase
+import Swinject
+import SwinjectStoryboard
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var container: Container!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        // DI
+        container = Container() { container in
+            // Views
+            container.storyboardInitCompleted(UINavigationController.self) { _,_ in }
+            container.storyboardInitCompleted(SearchViewController.self) { _,_ in }
+            container.storyboardInitCompleted(ProfileViewController.self) { _,_ in }
+            container.storyboardInitCompleted(CommentsViewController.self) { _,_ in }
+        }
+        
         // Firebase
         FIRApp.configure()
+        
+        // Initial Screen
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.backgroundColor = UIColor.white
+        window.makeKeyAndVisible()
+        self.window = window
+        let bundle = Bundle(for: SearchViewController.self)
+        let storyboard = SwinjectStoryboard.create(name: "Main", bundle: bundle, container: container)
+        window.rootViewController = storyboard.instantiateInitialViewController()
+        
         return true
     }
 
