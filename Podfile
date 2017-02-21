@@ -23,6 +23,9 @@ target 'RxGithub' do
   # Firebase
   pod 'Firebase/Core'
   pod 'Firebase/Database'
+  
+  # UI
+  pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift3'
 
   target 'RxGithubTests' do
     inherit! :search_paths

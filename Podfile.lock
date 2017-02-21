@@ -32,6 +32,7 @@ PODS:
     - RxCocoa
     - RxSwift
   - RxSwift (3.2.0)
+  - Spring (1.0.3)
   - Swinject (2.0.0)
   - SwinjectStoryboard (1.0.0):
     - Swinject (= 2.0.0)
@@ -44,8 +45,19 @@ DEPENDENCIES:
   - RxCocoa (~> 3.0)
   - RxOptional (~> 3.1)
   - RxSwift (~> 3.0)
+  - Spring (from `https://github.com/MengTo/Spring.git`, branch `swift3`)
   - Swinject (= 2.0.0)
   - SwinjectStoryboard (= 1.0.0)
+
+EXTERNAL SOURCES:
+  Spring:
+    :branch: swift3
+    :git: https://github.com/MengTo/Spring.git
+
+CHECKOUT OPTIONS:
+  Spring:
+    :commit: 3a9227c6e9157e7b47f5ac1ee5abab2a56b50002
+    :git: https://github.com/MengTo/Spring.git
 
 SPEC CHECKSUMS:
   Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
@@ -61,9 +73,10 @@ SPEC CHECKSUMS:
   RxCocoa: ccdf43101a70407097a29082f648ba1676075b30
   RxOptional: b97b59183af80d1e729ac9e51d09a10be668d6a8
   RxSwift: 46574f70d416b7923c237195939cc488a7fbf3a0
+  Spring: 3f02b5dc3308572ef177b3cad0fa7bbc4b0706f7
   Swinject: 2e964a80d70ab09b3949c99032711f89147bfd60
   SwinjectStoryboard: 8e0d3c0202b64172bdf915d55e8dc83d9c4e7863
 
-PODFILE CHECKSUM: 58d45e4871bbd3a32a01766368c658ca8c4f463a
+PODFILE CHECKSUM: 934b7edfdf8dfcbcf8adfabd1b5c3683f44e8042
 
 COCOAPODS: 1.1.1

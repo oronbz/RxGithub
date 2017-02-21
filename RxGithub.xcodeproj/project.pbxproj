@@ -10,12 +10,14 @@
 		1B2D9A5EE040F30CF068E456 /* Pods_RxGithubTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FFB26659F0C8593B69B09DF /* Pods_RxGithubTests.framework */; };
 		69654393206006EACB3F9269 /* Pods_RxGithub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91504F4F141A0F492F448E6F /* Pods_RxGithub.framework */; };
 		923DE4731E5B450D001969F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923DE4721E5B450D001969F0 /* AppDelegate.swift */; };
-		923DE4751E5B450D001969F0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923DE4741E5B450D001969F0 /* ViewController.swift */; };
+		923DE4751E5B450D001969F0 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923DE4741E5B450D001969F0 /* SearchViewController.swift */; };
 		923DE4781E5B450D001969F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 923DE4761E5B450D001969F0 /* Main.storyboard */; };
 		923DE47A1E5B450D001969F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 923DE4791E5B450D001969F0 /* Assets.xcassets */; };
 		923DE47D1E5B450D001969F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 923DE47B1E5B450D001969F0 /* LaunchScreen.storyboard */; };
 		923DE4881E5B450E001969F0 /* RxGithubTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923DE4871E5B450E001969F0 /* RxGithubTests.swift */; };
 		92B0192A1E5B470A00BB4B25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92B019291E5B470A00BB4B25 /* GoogleService-Info.plist */; };
+		92F9183F1E5B9A65004199F0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F9183E1E5B9A65004199F0 /* ProfileViewController.swift */; };
+		92F918411E5B9AD5004199F0 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F918401E5B9AD5004199F0 /* CommentsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +38,7 @@
 		91504F4F141A0F492F448E6F /* Pods_RxGithub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxGithub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		923DE46F1E5B450D001969F0 /* RxGithub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxGithub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		923DE4721E5B450D001969F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		923DE4741E5B450D001969F0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		923DE4741E5B450D001969F0 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		923DE4771E5B450D001969F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		923DE4791E5B450D001969F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		923DE47C1E5B450D001969F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -45,6 +47,8 @@
 		923DE4871E5B450E001969F0 /* RxGithubTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxGithubTests.swift; sourceTree = "<group>"; };
 		923DE4891E5B450E001969F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92B019291E5B470A00BB4B25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		92F9183E1E5B9A65004199F0 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		92F918401E5B9AD5004199F0 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		F472D77CB1259AAEEE9959AD /* Pods-RxGithub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxGithub.release.xcconfig"; path = "Pods/Target Support Files/Pods-RxGithub/Pods-RxGithub.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,8 +106,8 @@
 		923DE4711E5B450D001969F0 /* RxGithub */ = {
 			isa = PBXGroup;
 			children = (
+				92B0192B1E5B59FD00BB4B25 /* View */,
 				923DE4721E5B450D001969F0 /* AppDelegate.swift */,
-				923DE4741E5B450D001969F0 /* ViewController.swift */,
 				923DE4761E5B450D001969F0 /* Main.storyboard */,
 				923DE4791E5B450D001969F0 /* Assets.xcassets */,
 				923DE47B1E5B450D001969F0 /* LaunchScreen.storyboard */,
@@ -120,6 +124,24 @@
 				923DE4891E5B450E001969F0 /* Info.plist */,
 			);
 			path = RxGithubTests;
+			sourceTree = "<group>";
+		};
+		92B0192B1E5B59FD00BB4B25 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				92F9183D1E5B9A31004199F0 /* Controllers */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		92F9183D1E5B9A31004199F0 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				923DE4741E5B450D001969F0 /* SearchViewController.swift */,
+				92F9183E1E5B9A65004199F0 /* ProfileViewController.swift */,
+				92F918401E5B9AD5004199F0 /* CommentsViewController.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		D68A7A89D6D020BC43F84450 /* Frameworks */ = {
@@ -336,7 +358,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				923DE4751E5B450D001969F0 /* ViewController.swift in Sources */,
+				92F9183F1E5B9A65004199F0 /* ProfileViewController.swift in Sources */,
+				92F918411E5B9AD5004199F0 /* CommentsViewController.swift in Sources */,
+				923DE4751E5B450D001969F0 /* SearchViewController.swift in Sources */,
 				923DE4731E5B450D001969F0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
