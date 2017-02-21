@@ -25,7 +25,7 @@ class UserCell: UITableViewCell {
                 .bindTo(userImage.rx.image)
                 .disposed(by: disposeBag)
             
-            userLabel.text = viewModel.user
+            userLabel.text = viewModel.username
         }
     }
 

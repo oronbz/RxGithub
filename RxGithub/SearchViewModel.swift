@@ -43,7 +43,7 @@ class SearchViewModel: SearchViewModeling {
         
         cellModels = searchResults.map { userSearch in
                 userSearch.users.map { user in
-                    UserCellModel(network: network, imageUrl: user.avatarUrl, user: user.username)
+                    UserCellModel(network: network, imageUrl: user.avatarUrl, username: user.username)
                 }
             }
         
