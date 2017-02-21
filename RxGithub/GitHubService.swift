@@ -9,12 +9,12 @@
 import RxSwift
 
 enum GitHub {
-    case userSearch(query: String)
+    case userSearch(query: String, token: String)
     
     var url: String {
         switch self {
-        case .userSearch(let query):
-            return "https://api.github.com/search/users?q=\(query)"
+        case .userSearch(let query, let token):
+            return "https://api.github.com/search/users?q=\(query)&access_token=\(token)"
         }
     }
 }
@@ -24,14 +24,14 @@ protocol GitHubServicing {
 }
 
 class GitHubService: GitHubServicing {
-    let network: Networking
+    private let network: Networking
     
     init(network: Networking) {
         self.network = network
     }
     
     func userSearch(query: String) -> Observable<GitHubUserSearch> {
-        let url = GitHub.userSearch(query: query).url
+        let url = GitHub.userSearch(query: query, token: Keys.GitHubAccessToken).url
         return network.request(method: .get, url: url, parameters: nil, type: GitHubUserSearch.self)
     }
 }
