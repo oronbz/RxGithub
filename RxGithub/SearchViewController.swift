@@ -40,6 +40,13 @@ class SearchViewController: UIViewController {
             .bindTo(viewModel.cellDidSelect)
             .disposed(by: disposeBag)
         
+        tableView.rx.contentOffset
+            .subscribe(onNext: { [unowned self] _ in
+                if self.searchBar.isFirstResponder {
+                    self.searchBar.resignFirstResponder()
+                }
+            }).disposed(by: disposeBag)
+        
         viewModel.cellModels
             .bindTo(tableView.rx.items(cellIdentifier: "UserCell", cellType: UserCell.self)) {
                 i, cellModel, cell in
