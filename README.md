@@ -21,3 +21,9 @@ enum Keys {
     static let GitHubAccessToken = "TOKEN"
 }
 ```
+
+## Workshop sessions (Hebrew)
+
+[![Part 1](http://img.youtube.com/vi/5zs8CXiBcA4/0.jpg)](http://www.youtube.com/watch?v=5zs8CXiBcA4)
+
+[![Part 1](http://img.youtube.com/vi/9YH1sskeQhk/0.jpg)](http://www.youtube.com/watch?v=9YH1sskeQhk)
