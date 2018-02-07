@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // Firebase
-        FIRApp.configure()
+        FirebaseApp.configure()
         
         // Initial Screen
         let window = UIWindow(frame: UIScreen.main.bounds)

@@ -16,7 +16,7 @@ enum NetworkMethod {
 }
 
 protocol Networking {
-    func request<D: Decodable>(method: NetworkMethod, url: String, parameters: [String : Any]?, type: D.Type) -> Observable<D>
+    func request<D: Himotoki.Decodable>(method: NetworkMethod, url: String, parameters: [String : Any]?, type: D.Type) -> Observable<D>
     func request(method: NetworkMethod, url: String, parameters: [String : Any]?) -> Observable<Any>
     func image(url: String) -> Observable<UIImage>
 }
@@ -24,7 +24,7 @@ protocol Networking {
 final class Network: Networking {
     private let queue = DispatchQueue(label: "RxGithub.Network.Queue")
     
-    func request<D: Decodable>(method: NetworkMethod, url: String, parameters: [String : Any]?, type: D.Type) -> Observable<D> {
+    func request<D: Himotoki.Decodable>(method: NetworkMethod, url: String, parameters: [String : Any]?, type: D.Type) -> Observable<D> {
         return request(method: method, url: url, parameters: parameters)
             .map {
                 do {

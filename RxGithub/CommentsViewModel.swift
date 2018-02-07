@@ -32,7 +32,7 @@ class CommentsViewModel: CommentsViewModeling {
     private let disposeBag = DisposeBag()
     
     init(commentsService: CommentServicing, username: String) {
-        submitEnabled = commentText.map { text in text.characters.count > 0 }
+        submitEnabled = commentText.map { text in text.count > 0 }
             .startWith(false)
         
         comments = commentsService.comments(for: username)

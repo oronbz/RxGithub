@@ -14,7 +14,7 @@ struct GitHubUser {
     let avatarUrl: String
 }
 
-extension GitHubUser: Decodable {
+extension GitHubUser: Himotoki.Decodable {
     static func decode(_ e: Extractor) throws -> GitHubUser {
         return try GitHubUser(
             id: e <| "id",

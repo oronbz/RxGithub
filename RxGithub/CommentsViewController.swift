@@ -40,22 +40,22 @@ class CommentsViewController: UIViewController {
     private func setupBindings() {
         
         inserCommentField.rx.text.orEmpty
-            .bindTo(viewModel.commentText)
+            .bind(to: viewModel.commentText)
             .disposed(by: disposeBag)
         
         submitButton.rx.tap
             .do(onNext: { [unowned self] in
                 self.inserCommentField.text = ""
             })
-            .bindTo(viewModel.submitDidTap)
+            .bind(to: viewModel.submitDidTap)
             .disposed(by: disposeBag)
         
         viewModel.submitEnabled
-            .bindTo(submitButton.rx.isEnabled)
+            .bind(to: submitButton.rx.isEnabled)
             .disposed(by: disposeBag)
         
         viewModel.comments
-            .bindTo(tableView.rx.items(cellIdentifier: "CommentCell", cellType: CommentCell.self)) { index, comment, cell in
+            .bind(to: tableView.rx.items(cellIdentifier: "CommentCell", cellType: CommentCell.self)) { index, comment, cell in
                 cell.comment = comment
             }.disposed(by: disposeBag)
         

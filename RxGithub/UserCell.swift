@@ -26,7 +26,7 @@ class UserCell: UITableViewCell {
             guard let viewModel = viewModel else { return }
             
             viewModel.image
-                .bindTo(userImage.rx.image)
+                .bind(to: userImage.rx.image)
                 .disposed(by: disposeBag)
             
             userLabel.text = viewModel.username

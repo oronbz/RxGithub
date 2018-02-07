@@ -46,6 +46,9 @@ public class ImageLoader {
                 if (URL(string: urlString) != nil)
                 {
                     data = NSData(contentsOf: URL(string: urlString)!)
+                    if data != nil {
+                        self.cache.setObject(data!, forKey: urlString as NSString)
+                    }
                 }else{
                     return
                 }

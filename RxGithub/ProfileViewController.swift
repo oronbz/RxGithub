@@ -21,6 +21,8 @@ class ProfileViewController: UIViewController {
     
     private var disposeBag = DisposeBag()
     
+    var subscriptions: [Disposable] = []
+    
     private var commentsViewModel: CommentsViewModeling!
 
     override func viewDidLoad() {
@@ -33,19 +35,18 @@ class ProfileViewController: UIViewController {
     
     private func setupBindings() {
         
-        showCommentsButton.rx.tap
-            .bindTo(viewModel.showCommentsDidTap)
-            .disposed(by: disposeBag)
+        subscriptions.append(showCommentsButton.rx.tap
+            .bind(to: viewModel.showCommentsDidTap))
         
-        viewModel.image
-            .bindTo(userImage.rx.image)
-            .disposed(by: disposeBag)
+        subscriptions.append(viewModel.image
+            .bind(to: userImage.rx.image))
+
         
-        viewModel.showComments
+        subscriptions.append(viewModel.showComments
             .subscribe(onNext: { [unowned self] in
                 self.commentsViewModel = $0
                 self.performSegue(withIdentifier: "Comments", sender: self)
-            }).disposed(by: disposeBag)
+            }))
         
     }
     
@@ -53,6 +54,12 @@ class ProfileViewController: UIViewController {
         if (segue.identifier == "Comments") {
             let controller = segue.destination as! CommentsViewController
             controller.viewModel = commentsViewModel
+        }
+    }
+    
+    deinit {
+        subscriptions.forEach { disposable in
+            disposable.dispose()
         }
     }
 

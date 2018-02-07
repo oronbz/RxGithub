@@ -4,28 +4,31 @@
 target 'RxGithub' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
+  
+  # ignore all warnings from all pods
+  inhibit_all_warnings!
 
   # Pods for RxGithub
   
   # DI
-  pod 'Swinject', '2.0.0'
-  pod 'SwinjectStoryboard', '1.0.0'
+  pod 'Swinject'
+  pod 'SwinjectStoryboard'
   
   # Network
-  pod 'Himotoki', '~> 3.0'
-  pod 'Alamofire', '~> 4.3'
+  pod 'Himotoki'
+  pod 'Alamofire'
   
   # Rx
-  pod 'RxSwift',    '~> 3.0'
-  pod 'RxCocoa',    '~> 3.0'
-  pod 'RxOptional', '~> 3.1'
+  pod 'RxSwift'
+  pod 'RxCocoa'
+  pod 'RxOptional'
   
   # Firebase
   pod 'Firebase/Core'
   pod 'Firebase/Database'
   
   # UI
-  pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift3'
+  pod 'Spring', :git => 'https://github.com/MengTo/Spring.git'
 
   target 'RxGithubTests' do
     inherit! :search_paths

@@ -15,7 +15,7 @@ protocol CommentServicing {
 }
 
 class CommentService: CommentServicing {
-    private let ref = FIRDatabase.database().reference()
+    private let ref = Database.database().reference()
     
     func comments(for username: String) -> Observable<[String]> {
         return Observable.create { observer in

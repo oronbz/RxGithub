@@ -43,7 +43,7 @@ class SearchViewModel: SearchViewModeling {
                 gitHubService.userSearch(query: query).catchErrorJustReturn(GitHubUserSearch(count: 0, users: []))
             }.observeOn(MainScheduler.instance)
             .startWith(GitHubUserSearch(count: 0, users: []))
-            .shareReplay(1)
+            .share(replay: 1)
         
         cellModels = searchResults.map { userSearch in
                 userSearch.users.map { user in

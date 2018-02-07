@@ -8,30 +8,47 @@
 
 import class Foundation.NSNull
 
+// swiftlint:disable type_name
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+import class Foundation.NSDictionary
+private typealias _Dictionary = NSDictionary
+#else
+private typealias _Dictionary = [String: Any]
+#endif
+// swiftlint:enable type_name
+
 public struct Extractor {
     public let rawValue: Any
-    private let isDictionary: Bool
+    private let dictionary: _Dictionary?
 
     internal init(_ rawValue: Any) {
         self.rawValue = rawValue
-        self.isDictionary = rawValue is [String: Any]
+        self.dictionary = rawValue as? _Dictionary
     }
 
     // If we use `rawValue` here, that would conflict with `let rawValue: Any`
     // on Linux. This naming is avoiding the weird case.
     private func _rawValue(_ keyPath: KeyPath) throws -> Any? {
-        guard isDictionary else {
+        guard let dictionary = dictionary else {
             throw typeMismatch("Dictionary", actual: rawValue, keyPath: keyPath)
         }
 
-        let components = ArraySlice(keyPath.components)
-        return valueFor(components, rawValue)
+        return valueFor(keyPath, dictionary)
     }
 
     /// - Throws: DecodeError or an arbitrary ErrorType
     public func value<T: Decodable>(_ keyPath: KeyPath) throws -> T {
-        guard let rawValue = try _rawValue(keyPath) else {
+        guard let value: T = try valueOptional(keyPath) else {
             throw DecodeError.missingKeyPath(keyPath)
+        }
+
+        return value
+    }
+
+    /// - Throws: DecodeError or an arbitrary ErrorType
+    public func valueOptional<T: Decodable>(_ keyPath: KeyPath) throws -> T? {
+        guard let rawValue = try _rawValue(keyPath) else {
+            return nil
         }
 
         do {
@@ -40,15 +57,6 @@ public struct Extractor {
             throw DecodeError.missingKeyPath(keyPath + missing)
         } catch let DecodeError.typeMismatch(expected, actual, mismatched) {
             throw DecodeError.typeMismatch(expected: expected, actual: actual, keyPath: keyPath + mismatched)
-        }
-    }
-
-    /// - Throws: DecodeError or an arbitrary ErrorType
-    public func valueOptional<T: Decodable>(_ keyPath: KeyPath) throws -> T? {
-        do {
-            return try value(keyPath) as T
-        } catch let DecodeError.missingKeyPath(missing) where missing == keyPath {
-            return nil
         }
     }
 
@@ -93,24 +101,19 @@ extension Extractor: CustomStringConvertible {
     }
 }
 
-// Implement it as a tail recursive function.
-//
-// `ArraySlice` is used for performance optimization.
-// See https://gist.github.com/norio-nomura/d9ec7212f2cfde3fb662.
-private func valueFor<C: Collection>(_ keyPathComponents: C, _ JSON: Any) -> Any? where C.Iterator.Element == String, C.SubSequence == C {
-    guard
-        let first = keyPathComponents.first,
-        let nativeDict = JSON as? [String: Any],
-        case let nested? = nativeDict[first],
-        !(nested is NSNull) else // swiftlint:disable:this opening_brace
-    {
+private func valueFor(_ keyPath: KeyPath, _ json: Any) -> Any? {
+    var result = json
+    for key in keyPath.components {
+        if let object = result as? _Dictionary, let value = object[key] {
+            result = value
+        } else {
+            return nil
+        }
+    }
+
+    if result is NSNull {
         return nil
     }
 
-    if keyPathComponents.count == 1 {
-        return nested
-    }
-
-    let tail = keyPathComponents.dropFirst()
-    return valueFor(tail, nested)
+    return result
 }
