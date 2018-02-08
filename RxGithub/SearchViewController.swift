@@ -32,12 +32,12 @@ class SearchViewController: UIViewController {
     
     private func setupBindings() {
         searchBar.rx.text.orEmpty
-            .bindTo(viewModel.searchText)
+            .bind(to: viewModel.searchText)
             .disposed(by: disposeBag)
         
         tableView.rx.itemSelected
             .map { $0.row }
-            .bindTo(viewModel.cellDidSelect)
+            .bind(to: viewModel.cellDidSelect)
             .disposed(by: disposeBag)
         
         tableView.rx.contentOffset
@@ -48,13 +48,13 @@ class SearchViewController: UIViewController {
             }).disposed(by: disposeBag)
         
         viewModel.cellModels
-            .bindTo(tableView.rx.items(cellIdentifier: "UserCell", cellType: UserCell.self)) {
+            .bind(to: tableView.rx.items(cellIdentifier: "UserCell", cellType: UserCell.self)) {
                 i, cellModel, cell in
                 cell.viewModel = cellModel
             }.disposed(by: disposeBag)
         
         viewModel.resultCountLabel
-            .bindTo(resultsLabel.rx.text)
+            .bind(to: resultsLabel.rx.text)
             .disposed(by: disposeBag)
         
         // REMEMBER TO CREATE NEW SEGUE INSTEAD OF OLD ONE
