@@ -6,6 +6,9 @@
 //  Copyright © 2015 Syo Ikeda. All rights reserved.
 //
 
+import struct Foundation.Data
+import class Foundation.JSONSerialization
+
 extension String: Decodable {
     public static func decode(_ e: Extractor) throws -> String {
         return try castOrFail(e)
@@ -44,44 +47,72 @@ extension Bool: Decodable {
 
 // MARK: - Extensions
 
-extension Collection where Iterator.Element: Decodable {
+extension Array: Decodable where Element: Decodable {
     /// - Throws: DecodeError or an arbitrary ErrorType
-    public static func decode(_ JSON: Any) throws -> [Iterator.Element] {
-        guard let array = JSON as? [Any] else {
-            throw typeMismatch("Array", actual: JSON)
+    public static func decode(_ e: Extractor) throws -> [Element] {
+        guard let array = e.rawValue as? [Any] else {
+            throw typeMismatch("Array", actual: e.rawValue)
         }
 
-        return try array.map(Iterator.Element.decodeValue)
+        return try array.map(Element.decodeValue)
     }
 
     /// - Throws: DecodeError or an arbitrary ErrorType
-    public static func decode(_ JSON: Any, rootKeyPath: KeyPath) throws -> [Iterator.Element] {
-        return try Extractor(JSON).array(rootKeyPath)
+    @available(*, unavailable, renamed: "decodeValue(from:)")
+    public static func decode(from data: Data) throws -> [Element] {
+        fatalError()
+    }
+
+    /// - Throws: DecodeError or an arbitrary ErrorType
+    @available(*, unavailable, renamed: "decodeValue(_:)")
+    public static func decode(_ JSON: Any) throws -> [Element] {
+        fatalError()
+    }
+
+    /// - Throws: DecodeError or an arbitrary ErrorType
+    @available(*, unavailable, renamed: "decodeValue(from:rootKeyPath:)")
+    public static func decode(from data: Data, rootKeyPath: KeyPath) throws -> [Element] {
+        fatalError()
+    }
+
+    /// - Throws: DecodeError or an arbitrary ErrorType
+    @available(*, unavailable, renamed: "decodeValue(_:rootKeyPath:)")
+    public static func decode(_ JSON: Any, rootKeyPath: KeyPath) throws -> [Element] {
+        fatalError()
     }
 }
 
-extension ExpressibleByDictionaryLiteral where Value: Decodable {
+extension Dictionary: Decodable where Key == String, Value: Decodable {
     /// - Throws: DecodeError or an arbitrary ErrorType
+    public static func decode(_ e: Extractor) throws -> [String: Value] {
+        guard let dictionary = e.rawValue as? [String: Any] else {
+            throw typeMismatch("Dictionary", actual: e.rawValue)
+        }
+
+        return try dictionary.mapValues(Value.decodeValue)
+    }
+
+    /// - Throws: DecodeError or an arbitrary ErrorType
+    @available(*, unavailable, renamed: "decodeValue(from:)")
+    public static func decode(from data: Data) throws -> [String: Value] {
+        fatalError()
+    }
+
+    /// - Throws: DecodeError or an arbitrary ErrorType
+    @available(*, unavailable, renamed: "decodeValue(_:)")
     public static func decode(_ JSON: Any) throws -> [String: Value] {
-        guard let dictionary = JSON as? [String: Any] else {
-            throw typeMismatch("Dictionary", actual: JSON)
-        }
-
-        return try dictionary.mapValue(Value.decodeValue)
+        fatalError()
     }
 
     /// - Throws: DecodeError or an arbitrary ErrorType
-    public static func decode(_ JSON: Any, rootKeyPath: KeyPath) throws -> [String: Value] {
-        return try Extractor(JSON).dictionary(rootKeyPath)
+    @available(*, unavailable, renamed: "decodeValue(from:rootKeyPath:)")
+    public static func decode(from data: Data, rootKeyPath: KeyPath) throws -> [String: Value] {
+        fatalError()
     }
-}
 
-extension Dictionary {
-    internal func mapValue<T>(_ transform: (Value) throws -> T) rethrows -> [Key: T] {
-        var result = [Key: T](minimumCapacity: count)
-        for (key, value) in self {
-            result[key] = try transform(value)
-        }
-        return result
+    /// - Throws: DecodeError or an arbitrary ErrorType
+    @available(*, unavailable, renamed: "decodeValue(_:rootKeyPath:)")
+    public static func decode(_ JSON: Any, rootKeyPath: KeyPath) throws -> [String: Value] {
+        fatalError()
     }
 }

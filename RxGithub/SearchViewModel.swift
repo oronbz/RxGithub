@@ -37,7 +37,7 @@ class SearchViewModel: SearchViewModeling {
          commentService: CommentServicing) {
         
         let searchResults = searchText
-            .throttle(0.3, scheduler: MainScheduler.instance)
+            .throttle(.milliseconds(300), latest: false, scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .flatMapLatest { query in
                 gitHubService.userSearch(query: query).catchErrorJustReturn(GitHubUserSearch(count: 0, users: []))

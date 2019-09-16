@@ -21,6 +21,7 @@ import Swinject
 ///
 /// in User Defined Runtime Attributes section on Indentity Inspector pane.
 /// If no name is supplied to the registration, no runtime attribute should be specified.
+@objcMembers
 public class SwinjectStoryboard: _SwinjectStoryboardBase, SwinjectStoryboardProtocol {
     /// A shared container used by SwinjectStoryboard instances that are instantiated without specific containers.
     ///
@@ -38,6 +39,7 @@ public class SwinjectStoryboard: _SwinjectStoryboardBase, SwinjectStoryboardProt
         super.init()
     }
 
+#if os(iOS) || os(tvOS)
     /// Creates the new instance of `SwinjectStoryboard`. This method is used instead of an initializer.
     ///
     /// - Parameters:
@@ -48,7 +50,7 @@ public class SwinjectStoryboard: _SwinjectStoryboardBase, SwinjectStoryboardProt
     ///                The shared singleton container `SwinjectStoryboard.defaultContainer` is used as the container.
     ///
     /// - Returns: The new instance of `SwinjectStoryboard`.
-    @objc public class func create(
+    public class func create(
         name: String,
         bundle storyboardBundleOrNil: Bundle?) -> SwinjectStoryboard {
         return SwinjectStoryboard.create(name: name, bundle: storyboardBundleOrNil,
@@ -74,8 +76,6 @@ public class SwinjectStoryboard: _SwinjectStoryboardBase, SwinjectStoryboardProt
         return storyboard
     }
 
-
-#if os(iOS) || os(tvOS)
     /// Instantiates the view controller with the specified identifier.
     /// The view controller and its child controllers have their dependencies injected
     /// as specified in the `Container` passed to the initializer of the `SwinjectStoryboard`.
@@ -104,18 +104,60 @@ public class SwinjectStoryboard: _SwinjectStoryboardBase, SwinjectStoryboardProt
         // https://github.com/Swinject/Swinject/issues/10
         if let container = container.value as? _Resolver {
             let option = SwinjectStoryboardOption(controllerType: type(of: viewController))
-            typealias FactoryType = (Resolver, Container.Controller) -> Container.Controller
-            let _ = container._resolve(name: registrationName, option: option) { (factory: FactoryType) in factory(self.container.value, viewController) }
+            typealias FactoryType = ((Resolver, Container.Controller)) -> Any
+            let _ = container._resolve(name: registrationName, option: option) { (factory: FactoryType) in factory((self.container.value, viewController)) as Any } as Container.Controller?
         } else {
             fatalError("A type conforming Resolver protocol must conform _Resolver protocol too.")
         }
 
-        for child in viewController.childViewControllers {
-            injectDependency(to: child)
-        }
+#if swift(>=4.2)
+            for child in viewController.children {
+                injectDependency(to: child)
+            }
+#else
+            for child in viewController.childViewControllers {
+                injectDependency(to: child)
+            }
+#endif
     }
     
 #elseif os(OSX)
+    /// Creates the new instance of `SwinjectStoryboard`. This method is used instead of an initializer.
+    ///
+    /// - Parameters:
+    ///   - name:      The name of the storyboard resource file without the filename extension.
+    ///   - storyboardBundleOrNil:    The bundle containing the storyboard file and its resources. Specify nil to use the main bundle.
+    ///
+    /// - Note:
+    ///                The shared singleton container `SwinjectStoryboard.defaultContainer` is used as the container.
+    ///
+    /// - Returns: The new instance of `SwinjectStoryboard`.
+    public class func create(
+        name: NSStoryboard.Name,
+        bundle storyboardBundleOrNil: Bundle?) -> SwinjectStoryboard {
+        return SwinjectStoryboard.create(name: name, bundle: storyboardBundleOrNil,
+                                         container: SwinjectStoryboard.defaultContainer)
+    }
+
+    /// Creates the new instance of `SwinjectStoryboard`. This method is used instead of an initializer.
+    ///
+    /// - Parameters:
+    ///   - name:      The name of the storyboard resource file without the filename extension.
+    ///   - storyboardBundleOrNil:    The bundle containing the storyboard file and its resources. Specify nil to use the main bundle.
+    ///   - container: The container with registrations of the view/window controllers in the storyboard and their dependencies.
+    ///
+    /// - Returns: The new instance of `SwinjectStoryboard`.
+    public class func create(
+        name: NSStoryboard.Name,
+        bundle storyboardBundleOrNil: Bundle?,
+        container: Resolver) -> SwinjectStoryboard
+    {
+        // Use this factory method to create an instance because the initializer of UI/NSStoryboard is "not inherited".
+        let storyboard = SwinjectStoryboard._create(name, bundle: storyboardBundleOrNil)
+        storyboard.container = Box(container)
+        return storyboard
+    }
+
     /// Instantiates the view/Window controller with the specified identifier.
     /// The view/window controller and its child controllers have their dependencies injected
     /// as specified in the `Container` passed to the initializer of the `SwinjectStoryboard`.
@@ -123,7 +165,7 @@ public class SwinjectStoryboard: _SwinjectStoryboardBase, SwinjectStoryboardProt
     /// - Parameter identifier: The identifier set in the storyboard file.
     ///
     /// - Returns: The instantiated view/window controller with its dependencies injected.
-    public override func instantiateController(withIdentifier identifier: String) -> Any {
+    public override func instantiateController(withIdentifier identifier: NSStoryboard.SceneIdentifier) -> Any {
         SwinjectStoryboard.pushInstantiatingStoryboard(self)
         let controller = super.instantiateController(withIdentifier: identifier)
         SwinjectStoryboard.popInstantiatingStoryboard()
@@ -134,10 +176,8 @@ public class SwinjectStoryboard: _SwinjectStoryboardBase, SwinjectStoryboardProt
     }
     
     private func injectDependency(to controller: Container.Controller) {
-        if let controller = controller as? InjectionVerifiable {
-            guard !controller.wasInjected else { return }
-            defer { controller.wasInjected = true }
-        }
+        guard let controller = controller as? InjectionVerifiable, !controller.wasInjected else { return }
+        defer { controller.wasInjected = true }
 
         let registrationName = (controller as? RegistrationNameAssociatable)?.swinjectRegistrationName
         
@@ -146,8 +186,8 @@ public class SwinjectStoryboard: _SwinjectStoryboardBase, SwinjectStoryboardProt
         // https://github.com/Swinject/Swinject/issues/10
         if let container = container.value as? _Resolver {
             let option = SwinjectStoryboardOption(controllerType: type(of: controller))
-            typealias FactoryType = (Resolver, Container.Controller) -> Container.Controller
-            let _ = container._resolve(name: registrationName, option: option) { (factory: FactoryType) in factory(self.container.value, controller) }
+            typealias FactoryType = ((Resolver, Container.Controller)) -> Any
+            let _ = container._resolve(name: registrationName, option: option) { (factory: FactoryType) -> Any in factory((self.container.value, controller)) } as Container.Controller?
         } else {
             fatalError("A type conforming Resolver protocol must conform _Resolver protocol too.")
         }
@@ -155,9 +195,15 @@ public class SwinjectStoryboard: _SwinjectStoryboardBase, SwinjectStoryboardProt
             injectDependency(to: viewController)
 		}
         if let viewController = controller as? NSViewController {
+#if swift(>=4.2)
+            for child in viewController.children {
+                injectDependency(to: child)
+            }
+#else
             for child in viewController.childViewControllers {
                 injectDependency(to: child)
             }
+#endif
         }
     }
 #endif

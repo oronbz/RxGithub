@@ -10,6 +10,8 @@
 /// be up to 100 characters long. The "firebase_", "google_", and "ga_" prefixes are reserved and
 /// should not be used.
 
+#import <Foundation/Foundation.h>
+
 /// Game achievement ID (NSString).
 /// <pre>
 ///     NSDictionary *params = @{
@@ -390,8 +392,20 @@ static NSString *const kFIRParameterShipping NS_SWIFT_NAME(AnalyticsParameterShi
 ///       // ...
 ///     };
 /// </pre>
+///
+/// <b>This constant has been deprecated. Use Method constant instead.</b>
 static NSString *const kFIRParameterSignUpMethod NS_SWIFT_NAME(AnalyticsParameterSignUpMethod) =
     @"sign_up_method";
+
+/// A particular approach used in an operation; for example, "facebook" or "email" in the context
+/// of a sign_up or login event.  (NSString).
+/// <pre>
+///     NSDictionary *params = @{
+///       kFIRParameterMethod : @"google",
+///       // ...
+///     };
+/// </pre>
+static NSString *const kFIRParameterMethod NS_SWIFT_NAME(AnalyticsParameterMethod) = @"method";
 
 /// The origin of your traffic, such as an Ad network (for example, google) or partner (urban
 /// airship). Identify the advertiser, site, publication, etc. that is sending traffic to your
@@ -483,3 +497,36 @@ static NSString *const kFIRParameterValue NS_SWIFT_NAME(AnalyticsParameterValue)
 /// </pre>
 static NSString *const kFIRParameterVirtualCurrencyName
     NS_SWIFT_NAME(AnalyticsParameterVirtualCurrencyName) = @"virtual_currency_name";
+
+/// The name of a level in a game (NSString).
+/// <pre>
+///     NSDictionary *params = @{
+///       kFIRParameterLevelName : @"room_1",
+///       // ...
+///     };
+/// </pre>
+static NSString *const kFIRParameterLevelName NS_SWIFT_NAME(AnalyticsParameterLevelName) =
+    @"level_name";
+
+/// The result of an operation. Specify 1 to indicate success and 0 to indicate failure (unsigned
+/// integer as NSNumber).
+/// <pre>
+///     NSDictionary *params = @{
+///       kFIRParameterSuccess : @(1),
+///       // ...
+///     };
+/// </pre>
+static NSString *const kFIRParameterSuccess NS_SWIFT_NAME(AnalyticsParameterSuccess) = @"success";
+
+/// Indicates that the associated event should either extend the current session
+/// or start a new session if no session was active when the event was logged.
+/// Specify YES to extend the current session or to start a new session; any
+/// other value will not extend or start a session.
+/// <pre>
+///     NSDictionary *params = @{
+///       kFIRParameterExtendSession : @YES,
+///       // ...
+///     };
+/// </pre>
+static NSString *const kFIRParameterExtendSession NS_SWIFT_NAME(AnalyticsParameterExtendSession) =
+    @"extend_session";

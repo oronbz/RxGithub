@@ -17,7 +17,7 @@ extension GitHubUserSearch: Himotoki.Decodable {
     static func decode(_ e: Extractor) throws -> GitHubUserSearch {
         return try GitHubUserSearch(
             count: e <| "total_count",
-            users: e <|| "items"
+            users: e <| "items"
         )
     }
 }

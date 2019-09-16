@@ -6,54 +6,23 @@
 //  Copyright © 2015 Syo Ikeda. All rights reserved.
 //
 
-public enum DecodeError: Error {
+public enum DecodeError: Error, Hashable {
     case missingKeyPath(KeyPath)
     case typeMismatch(expected: String, actual: String, keyPath: KeyPath)
     case custom(String)
 }
 
-extension DecodeError: CustomStringConvertible {
-    public var description: String {
+extension DecodeError: CustomDebugStringConvertible {
+    public var debugDescription: String {
         switch self {
         case let .missingKeyPath(keyPath):
             return "DecodeError.missingKeyPath(\(keyPath))"
 
         case let .typeMismatch(expected, actual, keyPath):
-            return "DecodeError.typeMismatch(expected: \(expected), actual: \(actual), keyPath: \(keyPath.description))"
+            return "DecodeError.typeMismatch(expected: \(expected), actual: \(actual), keyPath: \(keyPath))"
 
         case let .custom(message):
             return "DecodeError.custom(\(message))"
-        }
-    }
-}
-
-extension DecodeError: Hashable {
-    public static func == (lhs: DecodeError, rhs: DecodeError) -> Bool {
-        switch (lhs, rhs) {
-        case let (.missingKeyPath(l), .missingKeyPath(r)):
-            return l == r
-
-        case let (.typeMismatch(la, lb, lc), .typeMismatch(ra, rb, rc)):
-            return la == ra && lb == rb && lc == rc
-
-        case let (.custom(l), .custom(r)):
-            return l == r
-
-        default:
-            return false
-        }
-    }
-
-    public var hashValue: Int {
-        switch self {
-        case let .missingKeyPath(keyPath):
-            return keyPath.hashValue
-
-        case let .typeMismatch(expected, actual, keyPath):
-            return expected.hashValue ^ actual.hashValue ^ keyPath.hashValue
-
-        case let .custom(message):
-            return message.hashValue
         }
     }
 }

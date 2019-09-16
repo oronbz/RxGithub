@@ -32,7 +32,7 @@ struct Group: Himotoki.Decodable {
             name: e <| "name",
             floor: e <| "floor",
             locationName: e <| [ "location", "name" ], // Parse nested objects
-            optional: e <||? "optional" // Parse optional arrays of values
+            optional: e <|? "optional" // Parse optional arrays of values
         )
     }
 }
@@ -89,24 +89,23 @@ You can transform an extracted value to an instance of non-`Decodable` types by 
 
 ```swift
 // Creates a `Transformer` instance.
-let URLTransformer = Transformer<String, NSURL> { URLString throws -> NSURL in
-    if let URL = NSURL(string: URLString) {
-        return URL
+let URLTransformer = Transformer<String, URL> { urlString throws -> URL in
+    if let url = URL(string: urlString) {
+        return url
     }
     
-    throw customError("Invalid URL string: \(URLString)")
+    throw customError("Invalid URL string: \(urlString)")
 }
 
-let URL = try URLTransformer.apply(e <| "foo_url")
-let otherURLs = try URLTransformer.apply(e <|| "bar_urls")
+let url: URL = try URLTransformer.apply(e <| "foo_url")
+let otherURLs: [URL] = try URLTransformer.apply(e <| "bar_urls")
 ```
 
 ## Requirements
 
-Himotoki 3.x requires / supports the following environments:
+Himotoki 4.x requires / supports the following environments:
 
-- Swift 3.0.1 / Xcode 8.1 or later
-    - If you use Swift 2.2 (Xcode 7.3) or Swift 2.3 (Xcode 8), you can use [2.1.1](https://github.com/ikesyo/Himotoki/releases/tag/2.1.1) instead.
+- Swift 4.2 / Xcode 10.1 or later
 - OS X 10.9 or later
 - iOS 8.0 or later
 - tvOS 9.0 or later
@@ -121,7 +120,7 @@ Currently Himotoki supports installation via the package managers [Carthage](htt
 
 Himotoki is [Carthage](https://github.com/Carthage/Carthage) compatible.
 
-- Add `github "ikesyo/Himotoki" ~> 3.0` to your Cartfile.
+- Add `github "ikesyo/Himotoki" ~> 3.1` to your Cartfile.
 - Run `carthage update`.
 
 ### CocoaPods
@@ -132,7 +131,7 @@ Himotoki also can be used by [CocoaPods](https://cocoapods.org/).
 
     ```ruby
     use_frameworks!
-    pod "Himotoki", "~> 3.0"
+    pod "Himotoki", "~> 3.1"
     ```
 
 - Run `pod install`.

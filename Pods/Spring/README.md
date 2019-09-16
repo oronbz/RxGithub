@@ -1,5 +1,6 @@
-## Updated for Swift 4
-Requires Xcode 9 and Swift 4.
+
+## Updated for Swift 5.0
+Requires Xcode 10.2 and Swift 5.0
 
 ## Installation
 Drop in the Spring folder to your Xcode project (make sure to enable "Copy items if needed" and "Create groups").
@@ -7,7 +8,7 @@ Drop in the Spring folder to your Xcode project (make sure to enable "Copy items
 Or via CocoaPods:
 ```
 use_frameworks!
-pod 'Spring', :git => 'https://github.com/MengTo/Spring.git'
+pod 'Spring', :git => 'https://github.com/MussaCharles/Spring.git'
 ```
 
 ## Usage with Storyboard

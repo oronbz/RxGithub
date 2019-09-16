@@ -8,6 +8,9 @@
 
 import class Foundation.NSNull
 
+// Importing RxCocoa also imports RxRelay
+@_exported import RxRelay
+
 import RxSwift
 #if os(iOS)
     import UIKit
@@ -52,7 +55,7 @@ extension RxCocoaError {
             return "Unobservable object `\(object)` was observed as `\(propertyName)` of `\(sourceObject)`."
         case .errorDuringSwizzling:
             return "Error during swizzling."
-        case .castingError(let object, let targetType):
+        case let .castingError(object, targetType):
             return "Error casting `\(object)` to `\(targetType)`"
         }
     }
@@ -132,7 +135,7 @@ func castOrFatalError<T>(_ value: AnyObject!, message: String) -> T {
 func castOrFatalError<T>(_ value: Any!) -> T {
     let maybeResult: T? = value as? T
     guard let result = maybeResult else {
-        rxFatalError("Failure converting from \(value) to \(T.self)")
+        rxFatalError("Failure converting from \(String(describing: value)) to \(T.self)")
     }
     
     return result

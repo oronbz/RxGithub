@@ -11,7 +11,7 @@ target 'RxGithub' do
   # Pods for RxGithub
   
   # DI
-  pod 'Swinject'
+  pod 'Swinject', '2.6.2'
   pod 'SwinjectStoryboard'
   
   # Network
@@ -26,9 +26,9 @@ target 'RxGithub' do
   # Firebase
   pod 'Firebase/Core'
   pod 'Firebase/Database'
-  
+
   # UI
-  pod 'Spring', :git => 'https://github.com/MengTo/Spring.git'
+  pod 'Spring', :git => 'https://github.com/MussaCharles/Spring.git'
 
   target 'RxGithubTests' do
     inherit! :search_paths
